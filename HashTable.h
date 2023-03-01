@@ -2,33 +2,33 @@
 #include <list>
 #include <string>
 
-
+template<class K, class V>
 struct Node
 {
-	int key;
-	std::string value;
+	K key;
+	V value;
 
-	explicit Node(const int &k, const std::string &vl): key(k), value(vl) {}
+	explicit Node(const K &k, const V &vl): key(k), value(vl) {}
 
-	Node(const Node &node): key(node.key), value(node.value) {}
+	Node(const Node<K, V> &node): key(node.key), value(node.value) {}
 
-	void operator=(const Node &node) {
+	void operator=(const Node<K, V> &node) {
 		key = node.key;
 		value = node.value;
 	}
 
-	bool operator== (const int &vl)     const { return key == vl; }
-	auto operator<=>(const int &vl)     const { return key <=> vl; }
-	bool operator== (const Node &node)  const { return key == node.key; }
-	auto operator<=>(const Node &node)  const { return key <=> node.key; }
+	bool operator== (const K &vl)     const { return key == vl; }
+	auto operator<=>(const K &vl)     const { return key <=> vl; }
+	bool operator== (const Node<K, V> &node)  const { return key == node.key; }
+	auto operator<=>(const Node<K, V> &node)  const { return key <=> node.key; }
 };
 
-
+template<class K, class V>
 class HashTable
 {
 private:
 
-	typedef std::list<Node*> List;
+	typedef std::list<Node<K, V>*> List;
 
 	static int defailtCapacity;
 	static float redistCoeff;
@@ -37,13 +37,15 @@ private:
 
 	List *array;
 
-	size_t Hash(const Node *node) const;
-	size_t Hash(const int &key)   const;
+	size_t Hash(const Node<K, V> *node) const;
+	size_t Hash(const K &key)   const;
 
 	void DestroyArray(List*);
 
 	void reHash (const List*, const size_t);
 	void reWrite(const List*);
+
+	List::iterator find(const Node<K, V>&, List&);
 
 public:
 
@@ -52,30 +54,38 @@ public:
 
 	void operator=(const HashTable&);
 
-	~HashTable()  { DestroyArray(array); }
+	~HashTable () { DestroyArray(array); }
 	size_t size() { return count; }
 
-	HashTable::List::iterator find(const int&) const;
+	Node<K, V>* find(const K&);
+
 	void reserve(const int);
-	void insert (const int&, const std::string&);
-	void erase  (const int&);
+	void insert (const K&, const V&);
+	void erase  (const K&);
 	void clear  ();
 
 	void outTable();
 };
 
 
-int HashTable::defailtCapacity = 10;
-float HashTable::redistCoeff = 0.75;
+
+template<typename K, typename V>
+int HashTable<K, V>::defailtCapacity = 10;
+template<typename K, typename V>
+float HashTable<K, V>::redistCoeff = 0.75;
 
 
-HashTable::HashTable(int cpcty): count(0), capacity(cpcty)
+
+template<typename K, typename V>
+HashTable<K, V>::HashTable(int cpcty): count(0), capacity(cpcty)
 {
 	if (cpcty < 0) throw 1;
+	if (!cpcty) capacity = defailtCapacity;
 
-	array = new std::list<Node*>[capacity];
+	array = new std::list<Node<K, V>*>[capacity];
 }
-HashTable::HashTable(const HashTable &copy):
+template<typename K, typename V>
+HashTable<K, V>::HashTable(const HashTable<K, V> &copy):
 	count(copy.count),
 	capacity(copy.capacity)
 {
@@ -84,7 +94,9 @@ HashTable::HashTable(const HashTable &copy):
 	reWrite(copy.array);
 }
 
-void HashTable::operator=(const HashTable &copy)
+
+template<typename K, typename V>
+void HashTable<K, V>::operator=(const HashTable<K, V> &copy)
 {
 	if (&copy == this) return;
 
@@ -96,7 +108,8 @@ void HashTable::operator=(const HashTable &copy)
 
 	reWrite(copy.array);
 }
-void HashTable::DestroyArray(List *arr) 
+template<typename K, typename V>
+void HashTable<K, V>::DestroyArray(List *arr)
 {
 	for (size_t i = 0; i < capacity; ++i)
 		for (const auto &it : arr[i])
@@ -105,31 +118,37 @@ void HashTable::DestroyArray(List *arr)
 }
 
 
-size_t HashTable::Hash(const Node *node) const
+template<typename K, typename V>
+size_t HashTable<K, V>::Hash(const Node<K, V> *node) const
 {
 	return node->key % capacity;
 }
-size_t HashTable::Hash(const int &key)   const
+template<typename K, typename V>
+size_t HashTable<K, V>::Hash(const K &key)   const
 {
 	return key % capacity;
 }
 
-void HashTable::reHash  (const List *copy, const size_t lenght)
+
+template<typename K, typename V>
+void HashTable<K, V>::reHash  (const List *copy, const size_t lenght)
 {
 	for (int i = 0; i < lenght; ++i)
 		for (const auto &it : copy[i])
 			array[Hash(it)].push_back(it);
 }
-void HashTable::reWrite (const List *copy)
+template<typename K, typename V>
+void HashTable<K, V>::reWrite (const List *copy)
 {
 	for (int i = 0; i < capacity; ++i)
 		for (const auto &it : copy[i])
 			array[i].push_back(it);
 }
-void HashTable::reserve (const int newCapacity)
+template<typename K, typename V>
+void HashTable<K, V>::reserve (const int newCapacity)
 {
 	if (newCapacity <= capacity) return;
-	outTable();
+	
 	List *tempArr = array;
 	size_t tempSz = capacity;
 
@@ -138,44 +157,62 @@ void HashTable::reserve (const int newCapacity)
 	
 	reHash(tempArr, tempSz);
 }
-void HashTable::insert  (const int &key, const std::string &value)
+template<typename K, typename V>
+void HashTable<K, V>::insert  (const K &key, const V &value)
 {
-	Node *newData = new Node(key, value);
+	Node<K, V> *newData = new Node(key, value);
 	array[Hash(key)].push_back(newData);
 	
 	if (++count * 1.0 / capacity >= redistCoeff)
 		reserve(capacity * 2);
 }
-void HashTable::erase   (const int &key)
+template<typename K, typename V>
+void HashTable<K, V>::erase   (const K &key)
 {
 	List &ref = array[Hash(key)];
-	auto it = find(key);
-
+	auto it = find(Node(key, V()), ref);
+	
 	if (it != ref.end()) {
 		ref.erase(it);
 		--count;
 	}	
 }
-void HashTable::clear   ()
+template<typename K, typename V>
+void HashTable<K, V>::clear   ()
 {
 	DestroyArray(array);
 
 	array = new List[capacity];
+
+	count = 0;
 }
 
-HashTable::List::iterator HashTable::find(const int &key) const
+
+template<typename K, typename V>
+Node<K, V>* HashTable<K, V>::find(const K &key)
 {
 	List &ref = array[Hash(key)];
-	List::iterator it = ref.begin();
 
-	for (it; it != ref.end(); ++it)
-		if ((*it)->key == key)
-			return it;
+	for (const auto &i : ref)
+		if (i->key == key)
+			return i;
 
-	return ref.end();
+	return nullptr;
 }
 
-void HashTable::outTable()
+template<typename K, typename V>
+HashTable<K, V>::List::iterator HashTable<K, V>::find(const Node<K, V> &node, List &list)
+{
+	
+	for (auto i = list.begin(); i != list.end(); ++i)
+		if ((*i)->key == node.key)
+			return i;
+
+	return list.end();		
+}
+
+template<typename K, typename V>
+void HashTable<K, V>::outTable()
 {
 	for (int i = 0; i < capacity; ++i) {
 		for (const auto &it : array[i])
