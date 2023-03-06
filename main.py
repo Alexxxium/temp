@@ -36,7 +36,7 @@ def sas1():
     print("\nC:\t", c, "\nD:\t", d)
     print("\nID C:\t", id(c), "\nID D:\t", id(d))
 
-    d += 5                                          # D получила новый адрес!
+    d += 5                                          # d получила новый адрес!
     print("\nC:\t", c, "\nD:\t", d)
     print("\nID C:\t", id(c), "\nID D:\t", id(d))
 
@@ -57,18 +57,18 @@ def sas1():
     print("\n///////////////////////////////////\n")
     #
 
-    listS = [1, 3, 4, 9, 0]                         # list id: ...04 (const)
+    list_s = [1, 3, 4, 9, 0]                         # list id: ...04 (const)
 
-    print("\nList:\t\t", listS,
-          "\nList id:\t", id(listS))
-    print("\nList[0]:\t", listS[0],                 # list[index] id: ...80
+    print("\nList:\t\t", list_s,
+          "\nList id:\t", id(list_s))
+    print("\nList[0]:\t", list_s[0],                 # list[index] id: ...80
           "\nList[0] id:\t", id(list[0]))
 
-    listS[0] = -3.14                                # list[index] id: new id - ...40
+    list_s[0] = -3.14                                # list[index] id: new id - ...40
 
-    print("\nList:\t\t", listS,                     # list id: ...04
-          "\nList id:\t", id(listS))
-    print("\nList[0]:\t", listS[0],
+    print("\nList:\t\t", list_s,                     # list id: ...04
+          "\nList id:\t", id(list_s))
+    print("\nList[0]:\t", list_s[0],
           "\nList[0] id:\t", id(list[0]))
 
 
@@ -148,7 +148,7 @@ def sas3():
     lst = [1, 2, 3, 4, 5, 6, True]
     print(lst)
 
-    for i in range(len(lst)):           # по умолчанию от 0 и до длины списка
+    for i in range(len(lst)):           # по умолчанию от 0 и до длины списка len(list)
         if lst[i] % 2 == 0:
             lst[i] += 1
         elif lst[i] == 5:
@@ -158,7 +158,7 @@ def sas3():
 
     print(lst)
 
-    for i in lst:                       # в i копируется объект
+    for i in lst:                       # семантика копирования
         i *= -1
         print(i)
 
@@ -172,6 +172,114 @@ def sas3():
     print(lst)
 
 
+def sas4():
+    """
+    *  Список (list) – это структура данных для хранения объектов различных типов.
+    Переменная, определяемая как список, содержит ссылку на структуру в памяти,
+    которая в свою очередь хранит ссылки на какие-либо другие объекты или структуры.
+    """
+
+    lst_t = [1, 8, 3, -1]
+
+    print("ID List:\t",    id(lst_t), '\n')
+    print("ID List[0]:\t", id(lst_t[0]), '\n',
+          "ID List[1]:\t", id(lst_t[1]), '\n',
+          "ID List[2]:\t", id(lst_t[2]), '\n',
+          "ID List[3]:\t", id(lst_t[3]), sep="")
+    print(id(lst_t[1]) - id(lst_t[0]),                  # если значения идут с одним шагом (lst[1] = lst[0] + 2 ...),
+          id(lst_t[2]) - id(lst_t[1]),                  # то и id элементов будут отличаться в один какой-то шаг
+          id(lst_t[3]) - id(lst_t[2]))
+
+    #
+
+    lst0 = [1, 2, 3, 4, 5]                  # инициализированный список
+    lst1 = list()                           # получаем копию списка через ф-цию list('class list') (пустой список)
+    lst2 = lst0[:]                          # копируем список в другой
+    lst3 = list(lst0)                       # присваиваем копию list0
+
+    #
+
+    print("ID lst0:\t", id(lst0), '\n',     # id у всех свой!
+          "ID lst1:\t", id(lst1), '\n',
+          "ID lst2:\t", id(lst2), '\n',
+          "ID lst3:\t", id(lst3), sep="")
+
+    print(lst0)
+    print(lst1)
+    print(lst2)
+    print(lst3)
+
+    #
+
+    list_s = [0, 1, 0, 1]
+    lst0 = list_s                           # lst0 - псевдоним list_s
+    lst1 = list_s                           # lst1 - псевдоним list_s
+    lst2 = list_s
+    lst3 = lst2                             # lst3: псевдоним lst2 - псевдоним list_s!
+
+    print("ID lst0:\t", id(lst0), '\n',     # id у всех одинаковый!
+          "ID lst1:\t", id(lst1), '\n',
+          "ID lst2:\t", id(lst2), '\n',
+          "ID lst3:\t", id(lst3), sep="")
+
+    lst0[0] = 0                             # [0]
+    lst1[1] = 1                             # [0, 1]
+    lst2[2] = 2                             # [0, 1, 2]
+    lst3[3] = 3                             # [0, 1, 2, 3]
+    list_s.append("end!")                   # [0, 1, 2, 3, 'end!']
+
+    print(lst0, id(lst0))                   # каждый список владеет list_s и является его ссылкой
+    print(lst1, id(lst1))
+    print(lst2, id(lst2))
+    print(lst3, id(lst3))
+    print(list_s, id(list_s))
+
+
+def sas5():
+
+    lst = [1, 12, -5, 37.467, True, "end!"]
+    stlist = lst[:-3]                           # получаем подсписок от 0 (по умолчанию) до -3 (6 - 3 = 3)
+
+    st = [-2, -7, 0]
+
+    print(lst)
+    print(stlist)
+
+    stlist.append(-3)                           # добавляем элемент в конец списка
+    stlist.insert(1, 2)
+    stlist.pop()                                # по умолчанию удаляется последний элемент
+    temp = stlist.pop(-1)                       # удаляем элемент по индексу + возвращаем этот элемент и записываем
+    print(stlist)
+
+    stlist.clear()
+    stlist.append(temp)
+    stlist.append(list(st))                     # добавляем в конец список, как целый элемент
+    stlist.extend(st)                           # добавляем все элементы, как отдельные
+    stlist[len(stlist):] = st                   # аналогично
+    print(stlist)
+
+    #
+    
+    stlist.remove(-2)                           # удаляем первый попавшийся элемент со значением -2
+    stlist.remove(-2)
+    print(stlist.count(-7))                     # возвращает количество повторений элемента
+
+    # stlist.sort(reverse=False)                # для использования, типы данных должны быть сравнимы
+    stlist.pop(1)
+    stlist.sort(reverse=False)                  # сортировка по возрастанию
+    print(stlist)
+
+    stlist.reverse()                            # инверсия списка
+    print(stlist)
+    print(stlist.index(-7))                     # возвращает индекс элемента
+
+    lss = stlist.copy()                         # возвращает копию списка
+    lss = stlist[:]                             # аналогичная запись
+    print(lss)
+
+
 # sas1()
 # sas2()
-sas3()
+# sas3()
+# sas4()
+sas5()
