@@ -10,17 +10,17 @@ def sas1():
     print("\nValue:\t", 3, "\nID:\t\t", id(3))
     print("\nValue:\t", number2, "\nID:\t\t", id(number2))
 
-    a = 5  # id A = 140711960048552
-    b = 7  # id B = 140711960048616
+    a = 5                                               # id A = 140711960048552
+    b = 7                                               # id B = 140711960048616
     print("\nA:\t", a, "\nB:\t", b)
     print("\nID A:\t", id(a), "\nID B:\t", id(b))
 
-    a = b  # id A = id B = 140711960048616
+    a = b                                               # id A = id B = 140711960048616
     print("\nA:\t", a, "\nB:\t", b)
     print("\nID A:\t", id(a), "\nID B:\t", id(b))
 
-    b = 1  # id A = 140711960048616,
-    print("\nA:\t", a, "\nB:\t", b)  # id B = new id (140711960048424)
+    b = 1                                               # id A = 140711960048616,
+    print("\nA:\t", a, "\nB:\t", b)                     # id B = new id (140711960048424)
     print("\nID A:\t", id(a), "\nID B:\t", id(b))
 
     #
@@ -57,16 +57,16 @@ def sas1():
     print("\n///////////////////////////////////\n")
     #
 
-    list_s = [1, 3, 4, 9, 0]  # list id: ...04 (const)
+    list_s = [1, 3, 4, 9, 0]                            # list id: ...04 (const)
 
     print("\nList:\t\t", list_s,
           "\nList id:\t", id(list_s))
-    print("\nList[0]:\t", list_s[0],  # list[index] id: ...80
+    print("\nList[0]:\t", list_s[0],                    # list[index] id: ...80
           "\nList[0] id:\t", id(list[0]))
 
-    list_s[0] = -3.14  # list[index] id: new id - ...40
+    list_s[0] = -3.14                                   # list[index] id: new id - ...40
 
-    print("\nList:\t\t", list_s,  # list id: ...04
+    print("\nList:\t\t", list_s,                        # list id: ...04
           "\nList id:\t", id(list_s))
     print("\nList[0]:\t", list_s[0],
           "\nList[0] id:\t", id(list[0]))
@@ -76,69 +76,69 @@ def sas2():
     a = 5
     b = 3
 
-    print(a / b)  # float
+    print(a / b)                                        # float
     print(a % b)
-    print(a // b)  # целая часть
-    print(a ** b)  # возведение в степень
+    print(a // b)                                       # целая часть
+    print(a ** b)                                       # возведение в степень
 
     print("\n//////////////////////////////////////\n")
 
-    x = 2 + 1j  # комплексные числа
-    z = complex(4, - 5)  # через функцию
+    x = 2 + 1j                                          # комплексные числа
+    z = complex(4, - 5)                                 # через функцию
 
     print(x + z)
     print(x - z)
     print(x / z)
-    # print(x % z)              not working
+    # print(x % z)                                      not working
     # print(x // z)
     print(x ** z)
 
-    print((x + z).real)  # действительная часть (обращаемся к анонимному объекту через .)
-    print((x + z).imag)  # мнимая часть
+    print((x + z).real)                                 # действительная часть (обращаемся к анонимному объекту через .)
+    print((x + z).imag)                                 # мнимая часть
 
     y = 6 + 1j
-    print(y.conjugate())  # комплексно-сопряженное число
+    print(y.conjugate())                                # комплексно-сопряженное число
 
     print("\n//////////////////////////////////////\n")
 
-    p = 41  # 101001
-    q = 19  # 010011
+    p = 41                                              # 101001
+    q = 19                                              # 010011
 
-    print(p | q)  # 111011
-    print(p & q)  # 000001
-    print(p ^ q)  # 111010
-    print(~p)  # нет unsigned чисел
+    print(p | q)                                        # 111011
+    print(p & q)                                        # 000001
+    print(p ^ q)                                        # 111010
+    print(~p)                                           # нет unsigned чисел
 
-    print(p << 1)  # ...0101001 << 1 = 1010010
-    print(p >> 1)  # ...0101001 >> 1 = 0010100 (при сдвиге за 2^0 значения 1 стираются)
+    print(p << 1)                                   # ...0101001 << 1 = 1010010
+    print(p >> 1)                                   # ...0101001 >> 1 = 0010100 (при сдвиге за 2^0 значения 1 стираются)
 
     print("\n//////////////////////////////////////\n")
 
-    num = 7589142  # cc 10
+    num = 7589142                                       # cc 10
 
-    print(hex(num))  # cc 16
-    print(oct(num))  # cc 8
-    print(bin(num))  # cc 2
+    print(hex(num))                                     # cc 16
+    print(oct(num))                                     # cc 8
+    print(bin(num))                                     # cc 2
 
     print("\n//////////////////////////////////////\n")
 
     # import math
 
-    pi = math.pi  # число п
-    e = math.e  # число е
+    pi = math.pi                                        # число п
+    e = math.e                                          # число е
 
     print("\npi:\t", pi)
     print("e:\t", e)
 
-    print(math.ceil(pi))  # округление к большему значению до целых
-    print(math.fabs(-3.14))  # абсолютное значение: 3
-    print(math.factorial(5))  # 1 * 2 * 3 * 4 * 5
-    print(math.floor(pi))  # целая часть
+    print(math.ceil(pi))                                # округление к большему значению до целых
+    print(math.fabs(-3.14))                             # абсолютное значение: 3
+    print(math.factorial(5))                            # 1 * 2 * 3 * 4 * 5
+    print(math.floor(pi))                               # целая часть
 
-    print(math.log2(16))  # логарифм от 16 по основанию 2
-    print(math.log10(1000))  # десятичный логарифм
-    print(math.log(e * 16))  # по умолчанию натуральный логарифм от e * 16
-    print(math.log(15, 3))  # логарифм от 15 по основанию 3
+    print(math.log2(16))                                # логарифм от 16 по основанию 2
+    print(math.log10(1000))                             # десятичный логарифм
+    print(math.log(e * 16))                             # по умолчанию натуральный логарифм от e * 16
+    print(math.log(15, 3))                              # логарифм от 15 по основанию 3
 
     print(math.sin(45))
     print(math.cos(-45))
@@ -148,7 +148,7 @@ def sas3():
     lst = [1, 2, 3, 4, 5, 6, True]
     print(lst)
 
-    for i in range(len(lst)):  # по умолчанию от 0 и до длины списка len(list)
+    for i in range(len(lst)):                           # по умолчанию от 0 и до длины списка len(list)
         if lst[i] % 2 == 0:
             lst[i] += 1
         elif lst[i] == 5:
@@ -158,7 +158,7 @@ def sas3():
 
     print(lst)
 
-    for i in lst:  # семантика копирования
+    for i in lst:                                       # семантика копирования
         i *= -1
         print(i)
 
@@ -186,20 +186,20 @@ def sas4():
           "ID List[1]:\t", id(lst_t[1]), '\n',
           "ID List[2]:\t", id(lst_t[2]), '\n',
           "ID List[3]:\t", id(lst_t[3]), sep="")
-    print(id(lst_t[1]) - id(lst_t[0]),  # если значения идут с одним шагом (lst[1] = lst[0] + 2 ...),
-          id(lst_t[2]) - id(lst_t[1]),  # то и id элементов будут отличаться в один какой-то шаг
+    print(id(lst_t[1]) - id(lst_t[0]),                  # если значения идут с одним шагом (lst[1] = lst[0] + 2 ...),
+          id(lst_t[2]) - id(lst_t[1]),                  # то и id элементов будут отличаться в один какой-то шаг
           id(lst_t[3]) - id(lst_t[2]))
 
     #
 
-    lst0 = [1, 2, 3, 4, 5]  # инициализированный список
-    lst1 = list()  # получаем копию списка через ф-цию list('class list') (пустой список)
-    lst2 = lst0[:]  # копируем список в другой
-    lst3 = list(lst0)  # присваиваем копию list0
+    lst0 = [1, 2, 3, 4, 5]                  # инициализированный список
+    lst1 = list()                           # получаем копию списка через ф-цию list('class list') (пустой список)
+    lst2 = lst0[:]                          # копируем список в другой
+    lst3 = list(lst0)                       # присваиваем копию list0
 
     #
 
-    print("ID lst0:\t", id(lst0), '\n',  # id у всех свой!
+    print("ID lst0:\t", id(lst0), '\n',     # id у всех свой!
           "ID lst1:\t", id(lst1), '\n',
           "ID lst2:\t", id(lst2), '\n',
           "ID lst3:\t", id(lst3), sep="")
@@ -212,23 +212,23 @@ def sas4():
     #
 
     list_s = [0, 1, 0, 1]
-    lst0 = list_s  # lst0 - псевдоним list_s
-    lst1 = list_s  # lst1 - псевдоним list_s
+    lst0 = list_s                           # lst0 - псевдоним list_s
+    lst1 = list_s                           # lst1 - псевдоним list_s
     lst2 = list_s
-    lst3 = lst2  # lst3: псевдоним lst2 - псевдоним list_s!
+    lst3 = lst2                             # lst3: псевдоним lst2 - псевдоним list_s!
 
-    print("ID lst0:\t", id(lst0), '\n',  # id у всех одинаковый!
+    print("ID lst0:\t", id(lst0), '\n',     # id у всех одинаковый!
           "ID lst1:\t", id(lst1), '\n',
           "ID lst2:\t", id(lst2), '\n',
           "ID lst3:\t", id(lst3), sep="")
 
-    lst0[0] = 0  # [0]
-    lst1[1] = 1  # [0, 1]
-    lst2[2] = 2  # [0, 1, 2]
-    lst3[3] = 3  # [0, 1, 2, 3]
-    list_s.append("end!")  # [0, 1, 2, 3, 'end!']
+    lst0[0] = 0             # [0]
+    lst1[1] = 1             # [0, 1]
+    lst2[2] = 2             # [0, 1, 2]
+    lst3[3] = 3             # [0, 1, 2, 3]
+    list_s.append("end!")   # [0, 1, 2, 3, 'end!']
 
-    print(lst0, id(lst0))  # каждый список владеет list_s и является его ссылкой
+    print(lst0, id(lst0))   # каждый список владеет list_s и является его ссылкой
     print(lst1, id(lst1))
     print(lst2, id(lst2))
     print(lst3, id(lst3))
@@ -239,10 +239,8 @@ def sas5():
     """
     *   Списковое включение (List Comprehensions) - автоматическое заполнение списка, упрощенная запись циклического
         заполнения: list = [i for i in range(n)]
-
         Обработчик списков (List Comprehensions) - упрощенное получение копии списка - то же списковое включение:
         copy_list = [i for i in list]
-
         Срезы (Slice) - start:stop:step - тройка чисел для получения подсписка, но в данном случае это именно срез,
         как отдельный тип данных <class slice>. С помощью среза можно получить копию подсписка:
         copy_list_slice = list[slice(start = 0, stop = n + 1, step = 1)]
@@ -250,43 +248,44 @@ def sas5():
     """
 
     lst = [1, 12, -5, 37.467, True, "end!"]
-    stlist = lst[:-3]  # получаем подсписок от 0 (по умолчанию) до -3 (6 - 3 = 3)
+    stlist = lst[:-3]                           # получаем подсписок от 0 (по умолчанию) до -3 (6 - 3 = 3)
 
     st = [-2, -7, 0]
 
     print(lst)
     print(stlist)
 
-    stlist.append(-3)  # добавляем элемент в конец списка
+    stlist.append(-3)                           # добавляем элемент в конец списка
     stlist.insert(1, 2)
-    stlist.pop()  # по умолчанию удаляется последний элемент
-    temp = stlist.pop(-1)  # удаляем элемент по индексу + возвращаем этот элемент и записываем
+    stlist.pop()                                # по умолчанию удаляется последний элемент
+    temp = stlist.pop(-1)                       # удаляем элемент по индексу + возвращаем этот элемент и записываем
     print(stlist)
 
     stlist.clear()
     stlist.append(temp)
-    stlist.append(list(st))  # добавляем в конец список, как целый элемент
-    stlist.extend(st)  # добавляем все элементы, как отдельные
-    stlist[len(stlist):] = st  # аналогично
+    # stlist.append(list(st))                   # добавляем в конец список, как целый элемент
+    stlist.extend(st)                           # добавляем все элементы, как отдельные
+    stlist[len(stlist):] = st                   # аналогично
     print(stlist)
 
     #
 
-    stlist.remove(-2)  # удаляем первый попавшийся элемент со значением -2
+    stlist.remove(-2)                           # удаляем первый попавшийся элемент со значением -2
     stlist.remove(-2)
-    print(stlist.count(-7))  # возвращает количество повторений элемента
+    print(stlist.count(-7))                     # возвращает количество повторений элемента
 
     # stlist.sort(reverse=False)                # для использования, типы данных должны быть сравнимы
     stlist.pop(1)
-    stlist.sort(reverse=False)  # сортировка по возрастанию
+    stlist.sort(reverse=False)      # сортировка по возрастанию
     print(stlist)
 
-    stlist.reverse()             # инверсия списка
+    stlist.reverse()                # инверсия списка
     print(stlist)
-    print(stlist.index(-7))      # возвращает индекс элемента
+    print(stlist.index(-7))         # возвращает индекс элемента
 
-    lss = stlist.copy()          # возвращает копию списка
-    lss = stlist[:]              # аналогичная запись
+    lss = stlist.copy()             # возвращает копию списка
+    print(lss)
+    lss = stlist[:]                 # аналогичная запись
     print(lss)
 
     #
@@ -322,7 +321,6 @@ def sas6():
     """
     *   Кортеж (tuple) – это неизменяемая структура данных, которая по своему подобию очень похожа на список.
         Методы такие-же, как и у списка, но только те, что не изменяют сам кортеж ну или же константные методы
-
         Преимущества:
             1. доступ к элементам осуществляется быстрее
             2. затраты по памяти меньше
@@ -331,6 +329,8 @@ def sas6():
     tpl1 = (1, 2, 3, 4, 5, 6, 7)
     tpl2 = tuple((1, 2, 3, 4, 5, 6, 7))
     tpl0 = tuple(tpl1)
+
+    print(tpl2)
 
     tpl0.count(1)
     tpl0.index(1)
@@ -345,7 +345,73 @@ def sas6():
     print("List: \t", type(lst), '\n', sys.getsizeof(lst), sep="")  # 200! - элементы хранятся где-то еще...
 
     print(tuple(lst[:5]))
-    print(list(tpl)
+    print(list(tpl))
+
+
+def sas7():
+    """
+    *   Словарь (dict) представляет собой структуру данных (которая ещё называется ассоциативный массив),
+        предназначенную для хранения произвольных объектов с доступом по ключу: key : value.
+        Ключи уникальны!
+    """
+
+    dict1 = {"key1": 18, "key2": 19}
+    dict2 = dict(alex=1, mark=2)        # через функцию
+    print("Dict1:\t\t", dict1)
+    print("Dict2:\t\t", dict2)
+
+    dict2["key1"] = 12                  # добавляем пару с ключом 'key1' и значением 12 (такого ключа нет в словаре)
+    dict2["key2"] = 19                  # ---//---
+    dict2["alex"] = 2                   # обращаемся к ключу и меняем значение (такой ключ у нас есть)
+    dict2["mark"] = 12                  # ---//---
+    del dict2["key2"]                   # удаляем пару по ключу (если такого ключа нет, то выбрасывается исключение)
+    # del dict2["sass"]                 # выбрасывается исключение
+
+    if "sass" in dict2:                 # True если ключ "sass" есть в словаре
+        del dict2["sass"]
+
+    print("New dict:\t", dict2)
+
+    #
+    print("\n///////////////////////////////////////////\n")
+    #
+
+    dict1 = dict2.copy()                # возвращает копию словаря
+    print(dict1)
+    dict1 = dict2.fromkeys(dict2, 2)    # создает словарь с ключами из другого словаря/списка/кортежа и значением 2,
+    print(dict1)                        # None по умолчанию
+
+    print(dict1.get("alex"))            # возвращает копию значения по ключу
+    print(dict1.get("sass"))            # None, если такого ключа нет
+
+    print(dict1.items())                # возвращает список пар, где ключ-значение - кортеж
+    print(dict1.keys())                 # список ключей
+    print(dict1.values())               # список значений
+
+    print(dict1.pop("sas", None))       # удаляет пару и возвращает значение, если не нашелся, то вернется None
+    print(dict1)
+    print(dict1.pop("key1"))            # если не нашелся, то вернется default и выбросится исключение
+    print(dict1)
+    print(dict1.popitem())
+    print(dict1)
+
+    #
+    print("\n///////////////////////////////////////////\n")
+    #
+
+    dict1 = {"str1": 1, "str2": 2, "str3": 3, "str4": 4}
+    other = dict(str1=0, str2=1, alex=5)
+
+    print(dict1.setdefault("str3", 2))  # возвращает значение по ключу, если не нашлось, то записывает новую пару
+    print(dict1)
+    print(dict1.setdefault("mark", 6))
+    print(dict1)
+    print(dict1.setdefault("anna", 7))  # если значение не указано, то в новую пару записывается None
+    print(dict1)
+    dict1.update(other)                 # обновление: перезапись значений или добавление новых пар
+    print(dict1)
+
+    dict1.clear()
 
 
 # sas1()
@@ -353,4 +419,5 @@ def sas6():
 # sas3()
 # sas4()
 # sas5()
-sas6()
+# sas6()
+sas7()
