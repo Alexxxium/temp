@@ -1,5 +1,6 @@
 import math
 import sys
+import Funck
 
 
 def sas1():
@@ -414,10 +415,102 @@ def sas7():
     dict1.clear()
 
 
+def sas8():
+    """
+    * Задача:
+        Дана строка типа: xxx3[xxx5[xxx2[xxx]xxx]xxx]xxxx - где:
+        x - некоторые буквы или в сумме какая-то подстрока,
+        число - множитель на который нужно продублировать подстроку,
+        скобки - начало и конец дублируемой строки.
+
+    * Свойства:
+        после числа (коэффициента) всегда есть открывающая скобка и перед каждой открывающей скобки
+        всегда стоит коэффициент;
+        у каждой открывающей скобки есть соответствующая закрывающая скобка;
+        и стоит учитывать двузначные числа.
+
+    """
+
+    string = "abc     2[Sys 3[sUs4[Z]]]     SAS 12[ ak2[M]]"
+    result = Funck.get_str(string)
+
+    print(string)
+    print(result)
+
+    # lambda function
+
+    print((lambda x: x ** 2)(5))
+    print((lambda x: x ** 2)(7))
+    print((lambda x: x ** 2)(9))
+
+
+def sas9():
+    """
+    * Исключениями (exceptions) - проблемы, возникающие в ходе выполнения программы,
+    которые допускают возможность дальнейшей ее работы в рамках основного алгоритма.
+
+    2 типа:
+        1. Синхронные - эти исключения могут возникнуть только в определенных местах программы.
+        Например, если у вас есть код, который открывает файл и считывает из него данные,
+        то исключение типа “ошибка чтения данных” может произойти только в указанном куске кода.
+
+        2. Асинхронные - эти исключения могут возникнуть в любой момент работы программы,
+        они, как правило, связаны с какими-либо аппаратными проблемами, либо приходом данных.
+        В качестве примера можно привести сигнал отключения питания.
+    """
+
+    try:
+        int("sas")
+    except Exception as exc:                            # Exception - родитель всех исключений
+        print("Error!:\t", exc, "\ntype:\t", type(exc))
+
+    #
+
+    try:
+        d = int(input("value:\t"))                      # символ или 0 вызовут исключение
+        var = 12 / d
+        print("All right!")
+    except (ZeroDivisionError, ValueError) as exc:      # типы возможных исключений
+        print()
+    else:
+        print("Else block")                             # блок else выполняется, если исключение не выбросилось
+    finally:
+        print("Finally")                                # блок finally выполняется всегда после конструкции
+
+    #
+
+    try:
+        raise Exception("Some exception")
+    except Exception as exc:
+        print("Exception:\t", exc)
+
+    #
+
+    class NegValException(Exception):                   # наследуемся от базового класса исключений
+        pass
+
+    try:
+        val = int(input("input positive number: "))
+        if val < 0:
+            raise NegValException("Neg val: " + str(val))   # выбрасываем свое исключение
+        print(val + 10)
+    except NegValException as e:
+        print(e)
+
+    #
+
+    try:
+        Funck.get_exception()                           # местное раскручивание стека
+    except Exception as exc:
+        print("Catch!:\t", exc)
+
+
 # sas1()
 # sas2()
 # sas3()
 # sas4()
 # sas5()
 # sas6()
-sas7()
+# sas7()
+# sas8()
+sas9()
