@@ -1,6 +1,7 @@
 import math
 import sys
-import Funck
+
+import Func
 
 
 def sas1():
@@ -432,7 +433,7 @@ def sas8():
     """
 
     string = "abc     2[Sys 3[sUs4[Z]]]     SAS 12[ ak2[M]]"
-    result = Funck.get_str(string)
+    result = Func.get_str(string)
 
     print(string)
     print(result)
@@ -469,8 +470,8 @@ def sas9():
     try:
         d = int(input("value:\t"))                      # символ или 0 вызовут исключение
         var = 12 / d
-        print("All right!")
-    except (ZeroDivisionError, ValueError) as exc:      # типы возможных исключений
+        print("All right!", var)
+    except (ZeroDivisionError, ValueError):             # типы возможных исключений
         print()
     else:
         print("Else block")                             # блок else выполняется, если исключение не выбросилось
@@ -500,9 +501,97 @@ def sas9():
     #
 
     try:
-        Funck.get_exception()                           # местное раскручивание стека
+        Func.get_exception()                           # местное раскручивание стека
     except Exception as exc:
         print("Catch!:\t", exc)
+
+
+def sas10():
+    """
+    * Режимы доступа к файлу:
+    ‘r’ – открыть файл для чтения;
+    ‘w’ – открыть файл для записи;
+    ‘x’ – открыть файл с целью создания, если файл существует, то вызов функции open завершится с ошибкой;
+    ‘a’ – открыть файл для записи, при этом новые данные будут добавлены в конец файла, без удаления существующих;
+    ‘b’ – бинарный режим;
+    ‘t’ – текстовый режим;
+    ‘+’ – открывает файл для обновления.
+    * По умолчанию файл открывается на чтение в текстовом режиме.
+
+    """
+    # nums = map(int, input().split())
+    # print(list(nums))
+
+    try:
+        open("sas.txt", 'x')                        # создаем файл
+    except Exception as exc:
+        print("File already created!:\t", exc)      # обрабатываем исключение, если файл уже был создан
+    else:
+        print("File is created!")
+
+    file = open("sas.txt", 'w')                     # открываем файл для записи
+    file.write("sas sys sus\n")
+    file.write("sas sys sus\n")                     # записываем строки
+    file.seek(0)                                    # устанавливаем курсор записи в позицию 0
+    file.write("Start pos(0):\t")                   # перезаписываем начиная от начала (seek(0))
+    file.seek(3)                                    # тоже перезапись
+    file.write("pos(3): ")
+    file.seek(60)                                   # задаем много большую позицию
+    file.write("pos(60): some text")                # где-то в середине файла продолжаем запись (файл сильно увеличился)
+    pos = file.tell()                               # текущая позиция (pos1)
+
+    file.write(
+        "\nend pos: " + str(pos) +                  # pos1
+        ' ' + str(file.tell())                      # тоже pos1
+    )                                               # уже pos2
+
+    file.write(
+        "\nnew pos: " +
+        str(file.tell())                            # pos2
+    )                                               # после записи pos3
+
+    file.close()                                    # ручками закрываем файл
+
+    #
+
+    with open("sas.txt", 'r') as file:              # wist отслеживает конец работы и закрывает файл
+        for line in file:                           # построчное чтение через цикл
+            print(line)
+
+        file.seek(0)                                # в начало файла
+
+        line = file.read(5)                         # посимвольно считывание (5 символов)
+        print("\nNew read:\t", line)
+
+        line = file.readline()                      # от текущей позиции (6) считываем строку
+        print("Read line:\t", line)
+
+        line = file.readline()
+        print("Read line:\t", line)
+
+    # файл закрыт
+
+
+def sas11():
+
+    from SomeModl import some_func, some_pos
+
+    some_func()
+    print(some_pos())
+    # some_result()
+
+    import SomeModl
+
+    SomeModl.some_result()
+    some_func()
+    SomeModl.some_pos()
+
+    # import cowsay as cow
+    # cow.cow("Ожидай")
+
+
+def sas12():
+    pass
 
 
 # sas1()
@@ -513,4 +602,7 @@ def sas9():
 # sas6()
 # sas7()
 # sas8()
-sas9()
+# sas9()
+# sas10()
+# sas11()
+sas12()
